@@ -1,0 +1,7 @@
+<div class="jumbotron">
+  <% if current_user %>
+    <%= render partial: 'welcome' %>
+  <% else %>
+    <%= render partial: 'guest' %>
+  <% end %>  
+</div>

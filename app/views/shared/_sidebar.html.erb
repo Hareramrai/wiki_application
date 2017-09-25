@@ -1,0 +1,10 @@
+<div class="col-lg-3">
+  <div class="well sidebar-nav">
+    <h3>Categories</h3>
+    <ul class="nav nav-list">
+      <% Tag.articles_count.each do |tag| %>
+        <li><%= link_to article_count(tag), articles_path(query: tag.name) %></li>
+      <% end %>
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->

@@ -1,0 +1,5 @@
+<i class="glyphicon glyphicon-tags"> </i>
+&nbsp;
+<% article.tags.each do |tag| %>
+  <a href=""> <%= content_tag(:span, tag.name, class: 'badge badge-info') %> </a> 
+<% end %>

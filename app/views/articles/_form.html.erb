@@ -1,0 +1,55 @@
+<%= form_for @article, :html => { :class => "form-horizontal article" } do |f| %>
+
+  <% if @article.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title, class: 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, class: 'form-control', placeholder: 'Title of article' %>
+    </div>
+    <%=f.error_span(:title) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :language, class: 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :language, class: 'form-control', placeholder: 'Language of article' %>
+    </div>
+    <%=f.error_span(:language) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :categories, class: 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :categories, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :body, class: 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :body, class: 'form-control', placeholder: 'Use markdown for code example', cols: 30, rows: 15 %>
+    </div>
+    <%=f.error_span(:body) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                articles_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,14 @@
+<%- model_class = Article -%>
+<div class="page-header">
+  <h1>
+    <%=t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),new_article_path, :class => 'btn btn-primary pull-right' %>
+  </h1>
+
+</div>
+
+<div class="article-previews">
+  <%= render @articles %>
+</div>
+
+<%= paginate @articles, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm" %>

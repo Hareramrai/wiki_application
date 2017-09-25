@@ -1,0 +1,25 @@
+<div class="row">
+  <h1><a href=""><%= @article.title %></a></h1>
+  <p class="lead">
+    <%= email_with_icon @article.user_email %>
+  </p>
+  <hr>
+  <p><%= time_with_icon(@article.updated_at) %></p>
+  <p> <%= render 'tags', article: @article %></p>
+  <hr>
+  <div class="well">
+    <%= markdown(@article.body) %>
+  </div>
+</div>
+<div class="button-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+                articles_path, :class => 'btn btn-default'  %>
+  <% if can? :manage, @article %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_article_path(@article), :class => 'btn btn-default' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  article_path(@article), :method => 'delete',
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-danger' %>
+  <% end %>
+</div>

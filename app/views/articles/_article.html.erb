@@ -1,0 +1,21 @@
+<div class="well">
+  <div class="media">
+    <a class="pull-left" href="#">
+      <%= image_tag article.user_gravatar_url, class: 'media-object img-circle' %>
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading"><%= link_to article.title, article %></h4>
+      <p class="text-right">By <%= article.user_email %></p>
+      <p>
+        <%= truncate(article.body, length: 160) { link_to "Continue", article } %>
+      </p>
+      <ul class="list-inline list-unstyled">
+        <li>
+          <span class="darkcyan"> <%= time_with_icon article.updated_at %> </span>
+        </li>
+        <li> | </li>
+        <span> <%= render partial: 'tags', locals: { article: article } %> </span>  
+      </ul>
+     </div>
+  </div>
+</div>

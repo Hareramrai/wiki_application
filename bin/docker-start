@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -x
+
+# wait for postgresql
+until nc -vz $POSTGRES_HOST 5432; do
+echo "Postgresql is not ready, sleeping..."
+sleep 1
+done
+echo "Postgresql is ready, starting Rails."
+
+# wait for redis
+until nc -vz $REDIS_HOST 6379; do
+echo "Redis is not ready, sleeping..."
+sleep 1
+done
+echo "Redis is ready, starting Rails."
+
+# optional
+rm tmp/pids/server.pid
+
+# setup database and start puma
+RAILS_ENV=$RAILS_ENV bundle exec rake db:create
+RAILS_ENV=$RAILS_ENV bundle exec rake db:migrate
+RAILS_ENV=$RAILS_ENV bundle exec rake db:seed
+RAILS_ENV=$RAILS_ENV bundle exec puma -C config/puma.rb
